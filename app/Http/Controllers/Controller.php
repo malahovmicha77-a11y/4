@@ -2,11 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-class Controller extends BaseController
+class CategoryController extends Controller
 {
-    use AuthorizesRequests, ValidatesRequests;
+    public function index()
+    {
+        $categories = Category::all();
+        return view('admin.categories.index', compact('categories'));
+    }
+
+    public function create()
+    {
+        return view('admin.categories.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Временная заглушка
+        dd('Метод store: создание категории', $request->all());
+    }
+
+    public function show($id)
+    {
+        // Временная заглушка
+        dd('Метод show: просмотр категории ID: ' . $id);
+    }
+
+    public function edit($id)
+    {
+        // Временная заглушка
+        dd('Метод edit: редактирование категории ID: ' . $id);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Временная заглушка
+        dd('Метод update: обновление категории ID: ' . $id, $request->all());
+    }
+
+    public function destroy($id)
+    {
+        // Временная заглушка
+        dd('Метод destroy: удаление категории ID: ' . $id);
+    }
 }
