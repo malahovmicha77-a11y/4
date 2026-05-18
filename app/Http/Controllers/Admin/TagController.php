@@ -36,7 +36,7 @@ class TagController extends Controller
 
         Tag::create([
             'name' => $request->name,
-            'title' => $request->name,  // ← ДОБАВИТЬ ЭТУ СТРОКУ
+            'title' => $request->name,
         ]);
 
         return redirect()->route('tags.index')->with('success', 'Тег успешно создан!');
@@ -71,7 +71,7 @@ class TagController extends Controller
         $tag = Tag::findOrFail($id);
         $tag->update([
             'name' => $request->name,
-            'title' => $request->name,  // ← ДОБАВИТЬ ЭТУ СТРОКУ
+            'title' => $request->name,
         ]);
 
         return redirect()->route('tags.index')->with('success', 'Тег успешно обновлен!');
@@ -83,12 +83,12 @@ class TagController extends Controller
     public function destroy(string $id)
     {
         $tag = Tag::findOrFail($id);
-
-        // Проверка: есть ли посты у тега
-        if ($tag->posts()->count() > 0) {
-            return redirect()->route('tags.index')->with('error', 'Нельзя удалить тег, который используется в постах!');
-        }
-
+        
+        // Временно отключаем проверку на посты (если нет deleted_at в posts)
+        // if ($tag->posts()->count() > 0) {
+        //     return redirect()->route('tags.index')->with('error', 'Нельзя удалить тег, который используется в постах!');
+        // }
+        
         $tag->delete();
 
         return redirect()->route('tags.index')->with('success', 'Тег успешно удален!');

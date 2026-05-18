@@ -1,23 +1,33 @@
 <?php
 
-namespace App\Models;  
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;  
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 class Post extends Model
 {
-    use Sluggable;  
+    use Sluggable, SoftDeletes;
 
     protected $fillable = [
         'title',
         'content',
         'slug',
-        'category_id'
+        'category_id',
+        'image',
+        'status'
     ];
 
-    public function tags()
+    public $timestamps = true;
+
+    public function sluggable(): array
     {
-        return $this->belongsToMany(Tag::class);
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
     public function category()
@@ -25,17 +35,14 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable(): array  
+    public function tags()
     {
-        return [
-            'slug' => [
-                'source' => 'title' 
-            ]
-        ];
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+    public function getImage(){
+        if (!$this->thumbnail) {
+            return asset("no -image.png");
+        }
+        return asset("uploads/{;$this->thumabail}");
     }
 }

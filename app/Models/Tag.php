@@ -10,18 +10,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Tag extends Model
 {
     use HasFactory, Sluggable;
+    
     protected $fillable = ['name', 'title', 'slug'];
 
     public function posts()
     {
         return $this->belongsToMany(Post::class);
     }
-     /**
-      * Return the sluggable configuration array for this model.
-      *
-     * @return array
+    
+    /**
+     * Return the sluggable configuration array for this model.
      */
- public function sluggable():array
+    public function sluggable(): array
     {
         return [
             'slug' => [

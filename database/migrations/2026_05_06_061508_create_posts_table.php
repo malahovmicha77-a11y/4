@@ -6,19 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+    public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('content');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
+    $table->id();
+    $table->string('title');
+    $table->text('content'); 
+    $table->string('slug')->unique();
+    $table->string('image')->nullable();
+    $table->foreignId('category_id')->constrained();
+    $table->enum('status', ['draft', 'published'])->default('draft');
+    $table->softDeletes();
+    $table->timestamps();
+});
     }
 
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('posts');
     }
