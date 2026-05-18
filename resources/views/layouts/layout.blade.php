@@ -129,6 +129,7 @@
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Dashboard -->
                         <li class="nav-item">
                             <a href="{{ route('admin.index') }}" class="nav-link @if(request()->routeIs('admin.index')) active @endif">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -136,6 +137,7 @@
                             </a>
                         </li>
 
+                        <!-- Пользователи -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
@@ -143,6 +145,7 @@
                             </a>
                         </li>
 
+                        <!-- Категории -->
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link @if(request()->routeIs('categories.*')) active @endif">
                                 <i class="nav-icon fas fa-folder"></i>
@@ -150,6 +153,32 @@
                             </a>
                         </li>
 
+                        <!-- ТЕГИ - ВЫПАДАЮЩИЙ СПИСОК -->
+                        <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tags"></i>
+                            <p>
+                                Теги
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/tags" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Список тегов</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/tags/create" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Добавить тег</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                        <!-- Товары -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-box"></i>
@@ -157,6 +186,7 @@
                             </a>
                         </li>
 
+                        <!-- Заказы -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
@@ -164,6 +194,7 @@
                             </a>
                         </li>
 
+                        <!-- Настройки -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-cog"></i>
@@ -195,8 +226,7 @@
 
             <section class="content">
                 <div class="container-fluid">
-                    {{-- @include('admin.layouts.partials.errors') --}}
-                    @include('layouts.partials.errors')
+                    @include('layouts.partials.errors')  <!-- ИСПРАВЛЕНО -->
                     
                     @yield('content')
                 </div>
@@ -219,12 +249,13 @@
     </div>
 
     <!-- jQuery -->
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/dist/js/adminlte.min.js') }}"></script>
 
     @stack('scripts')
+
 </body>
 </html>
