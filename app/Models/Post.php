@@ -3,7 +3,7 @@
 namespace App\Models;  
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\LaravelSluggable\Sluggable;  
+use Cviebrock\EloquentSluggable\Sluggable;  
 class Post extends Model
 {
     use Sluggable;  

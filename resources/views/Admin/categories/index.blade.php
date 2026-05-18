@@ -1,4 +1,3 @@
-
 @extends('layouts.layout')
 
 @section('title', 'Категории')
@@ -18,6 +17,7 @@
             </a>
         </div>
     </div>
+    
     <div class="card-body">
         <table class="table table-bordered table-striped">
             <thead>
@@ -32,16 +32,16 @@
                 @forelse($categories as $category)
                 <tr>
                     <td>{{ $category->id }}</td>
-                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->title }}</td>
                     <td>{{ $category->slug }}</td>
                     <td>
-                        <a href="{{ route('categories.edit', $category) }}" class="btn btn-warning btn-sm">
+                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Удалить категорию?')">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Вы уверены?')">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
@@ -54,6 +54,10 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <div class="card-footer">
+        {{ $categories->links() }}
     </div>
 </div>
 @endsection

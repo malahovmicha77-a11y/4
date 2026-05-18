@@ -9,24 +9,18 @@ use Illuminate\Routing\Controller;
 
 class MainController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-    
-        $tag = Tag::create([
-            'name' => 'Laravel 101',
-            'slug' => 'laravel-102',
-            'title' => 'wwww'
-            
-        ]);
+        $tag = Tag::where('name', 'Laravel 101')->first();
 
-        // $tag = new Tag();
-        // $tag->title = 'Привет мир';
-        // $tag->save();
-        // return view ('admin.index');
+        if (!$tag) {
+            $tag = Tag::create([
+                'name' => 'Laravel 101',
+                'slug' => 'laravel-101',
+                'title' => 'Маршрут'
+            ]);
+        }
 
-        dd($tag); 
+        return view('admin.index');
     }
 }
